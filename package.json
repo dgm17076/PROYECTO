@@ -1,0 +1,1 @@
+{"name":"gestor-donaciones-v2","version":"2.0.0","main":"server.js","scripts":{"start":"node server.js","test":"jest --coverage --runInBand"},"engines":{"node":">=18"},"devDependencies":{"jest":"^30.1.3"},"jest":{"testEnvironment":"node","collectCoverageFrom":["src/**/*.js"],"coverageThreshold":{"global":{"branches":80,"functions":80,"lines":80,"statements":80}}}}
