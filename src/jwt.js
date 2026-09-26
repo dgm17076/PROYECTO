@@ -1,0 +1,3 @@
+const crypto=require('crypto'); const b=x=>Buffer.from(x).toString('base64url');
+function sign(payload,secret,ttl=3600){const now=Math.floor(Date.now()/1000),data=`${b(JSON.stringify({alg:'HS256',typ:'JWT'}))}.${b(JSON.stringify({...payload,iat:now,exp:now+ttl}))}`;return `${data}.${crypto.createHmac('sha256',secret).update(data).digest('base64url')}`}
+function verify(token,secret){const p=String(token||'').split('.');if(p.length!==3)throw Error('TOKEN_INVALIDO');const data=`${p[0]}.${p[1]}`,sig=crypto.createHmac('sha256',secret).update(data).digest('base64url');if(p[2]!==sig)throw Error('TOKEN_INVALIDO');const x=JSON.parse(Buffer.from(p[1],'base64url').toString());if(x.exp<Math.floor(Date.now()/1000))throw Error('TOKEN_EXPIRADO');return x} module.exports={sign,verify};
