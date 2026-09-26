@@ -1,0 +1,1 @@
+const {createServer}=require('./src/app'); const port=Number(process.env.PORT||3000); createServer().listen(port,()=>console.log(`Gestor de Donaciones listo en http://localhost:${port}`));
