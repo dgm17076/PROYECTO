@@ -1,1 +1,41 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Donare | Gestión de Donaciones</title><link rel="stylesheet" href="style.css"></head><body><header><h2>♥ Donare</h2><p>Gestión de donaciones con trazabilidad</p></header><main><section class="card"><h1>Gestor de Donaciones</h1><p>Registra una cuenta, inicia sesión y da seguimiento a tus donaciones.</p></section><div class="grid"><section class="card"><h2>Crear cuenta</h2><input id="rn" placeholder="Nombre completo"><input id="re" placeholder="Correo"><input id="rp" type="password" placeholder="Contraseña (8+ caracteres)"><button onclick="register()">Crear cuenta</button></section><section class="card"><h2>Iniciar sesión</h2><input id="le" placeholder="Correo"><input id="lp" type="password" placeholder="Contraseña"><button onclick="login()">Entrar</button><button class="secondary" onclick="logout()">Cerrar sesión</button></section></div><section class="card"><h2>Nueva donación</h2><input id="type" placeholder="Tipo: alimentos, ropa..."><textarea id="description" placeholder="Descripción"></textarea><input id="quantity" type="number" min="1" placeholder="Cantidad"><select id="center"></select><button onclick="donate()">Registrar donación</button></section><section class="card"><h2>Donaciones</h2><button class="secondary" onclick="loadDonations()">Actualizar</button><div id="list"></div></section><p id="msg"></p></main><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gestor de Donaciones</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><h1>Gestor de Donaciones</h1><p>Trazabilidad y transparencia de recursos solidarios</p></div>
+  <nav><button class="navbtn" onclick="showView('home')">Inicio</button><button class="navbtn" onclick="showView('account')">Cuenta</button><button class="navbtn" onclick="showView('panel')">Mi panel</button></nav>
+</header>
+<main>
+  <div id="msg" class="message"></div>
+  <section id="home" class="view">
+    <div class="hero card"><span class="eyebrow">GESTIÓN SOLIDARIA</span><h2>Administra tus donaciones de forma sencilla</h2><p>Registra aportaciones, conserva la información del donante y consulta el estado de cada entrega desde un solo lugar.</p><button onclick="showView('account')">Comenzar</button></div>
+    <div class="grid three"><div class="card"><h3>Registro completo</h3><p>Nombre, fecha, cantidad, centro receptor e identificador de cada donación.</p></div><div class="card"><h3>Seguimiento</h3><p>Consulta si una donación está registrada, recibida, entregada o cancelada.</p></div><div class="card"><h3>Seguridad</h3><p>Autenticación JWT y permisos separados para usuarios y administradores.</p></div></div>
+  </section>
+  <section id="account" class="view hidden">
+    <div class="grid two">
+      <div class="card"><h2>Crear cuenta</h2><p class="muted">Regístrate para comenzar a donar.</p><label>Nombre completo</label><input id="rn" placeholder="Ej. Ana García"><label>Correo</label><input id="re" type="email" placeholder="correo@ejemplo.com"><label>Contraseña</label><input id="rp" type="password" placeholder="Mínimo 8 caracteres"><button onclick="register()">Crear cuenta</button></div>
+      <div class="card"><h2>Iniciar sesión</h2><p class="muted">Accede a tu panel personal o administrativo.</p><label>Correo</label><input id="le" type="email" placeholder="correo@ejemplo.com"><label>Contraseña</label><input id="lp" type="password" placeholder="Contraseña"><button onclick="login()">Entrar</button><button class="secondary" onclick="logout()">Cerrar sesión</button></div>
+    </div>
+  </section>
+  <section id="panel" class="view hidden">
+    <div id="userPanel">
+      <div class="grid two">
+        <div class="card"><h2>Nueva donación</h2><label>Tipo de donación</label><input id="type" placeholder="Ej. Alimentos no perecederos"><label>Descripción</label><textarea id="description" placeholder="Describe brevemente la donación"></textarea><label>Cantidad</label><input id="quantity" type="number" min="1" placeholder="Cantidad"><label>Centro receptor</label><select id="center"></select><button onclick="donate()">Registrar donación</button></div>
+        <div class="card"><div class="cardhead"><h2>Mis donaciones</h2><button class="secondary compact" onclick="loadDonations()">Actualizar</button></div><div id="list"><p class="muted">Inicia sesión para consultar tus donaciones.</p></div></div>
+      </div>
+    </div>
+    <div id="adminPanel" class="hidden">
+      <div class="grid two"><div class="card"><h2>Resumen administrativo</h2><div id="summary" class="stats"><p>Cargando resumen...</p></div></div><div class="card"><div class="cardhead"><h2>Administrar donaciones</h2><button class="secondary compact" onclick="loadAdmin()">Actualizar</button></div><div id="adminList"></div></div></div>
+    </div>
+  </section>
+</main>
+<footer>Proyecto académico · Gestor de Donaciones</footer>
+<script src="app.js"></script>
+</body>
+</html>
